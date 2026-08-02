@@ -1,0 +1,1042 @@
+{
+  "input_directory": "../build/heldout_test_data",
+  "successful_datasets": 4,
+  "failed_datasets": 0,
+  "total_evaluated_frames": 39920,
+  "total_elapsed_seconds": 6.421557299999677,
+  "overall_frames_per_second": 6216.560584143976,
+  "overall_average_seconds_per_frame": 0.00016086065380760712,
+  "overall_average_microseconds_per_frame": 160.86065380760712,
+  "results": [
+    {
+      "dataset": "DoS_dataset.csv",
+      "detector": "RuleBasedCanDetector",
+      "evaluated_frames": 9980,
+      "elapsed_seconds": 0.057888725999873714,
+      "frames_per_second": 172399.71734775734,
+      "average_seconds_per_frame": 5.800473547081534e-06,
+      "average_microseconds_per_frame": 5.800473547081534,
+      "confusion_matrix": {
+        "tp": 2424,
+        "fp": 3572,
+        "tn": 3984,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.6420841683366734,
+        "precision": 0.4042695130086724,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.5272631021704606,
+        "f1": 0.575771971496437,
+        "false_positive_rate": 0.4727368978295394,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {
+        "unknown_can_id": 2424,
+        "invalid_byte_1_value": 1269,
+        "invalid_byte_4_value": 1233,
+        "invalid_byte_2_value": 847,
+        "invalid_byte_0_value": 790,
+        "invalid_byte_6_value": 625,
+        "invalid_byte_7_value": 624,
+        "invalid_byte_5_value": 414,
+        "byte_4_out_of_range": 413,
+        "byte_5_out_of_range": 253,
+        "invalid_byte_3_value": 3,
+        "excessive_frequency": 2,
+        "byte_7_out_of_range": 2
+      },
+      "alert_examples": [
+        {
+          "row": 1,
+          "timestamp": 1478198408.821474,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 2,
+          "timestamp": 1478198408.827005,
+          "can_id": "02a0",
+          "dlc": 8,
+          "payload": [
+            "24",
+            "00",
+            "9a",
+            "1d",
+            "97",
+            "02",
+            "bd",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value",
+            "invalid_byte_2_value",
+            "invalid_byte_4_value",
+            "invalid_byte_5_value",
+            "invalid_byte_6_value"
+          ]
+        },
+        {
+          "row": 3,
+          "timestamp": 1478198408.832614,
+          "can_id": "0153",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "21",
+            "10",
+            "ff",
+            "00",
+            "ff",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_2_value"
+          ]
+        },
+        {
+          "row": 5,
+          "timestamp": 1478198408.843736,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 6,
+          "timestamp": 1478198408.849161,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 7,
+          "timestamp": 1478198408.854772,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 8,
+          "timestamp": 1478198408.860517,
+          "can_id": "0350",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "20",
+            "14",
+            "68",
+            "78",
+            "00",
+            "00",
+            "21"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_4_value"
+          ]
+        },
+        {
+          "row": 9,
+          "timestamp": 1478198408.86609,
+          "can_id": "0153",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "21",
+            "10",
+            "ff",
+            "00",
+            "ff",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_2_value"
+          ]
+        },
+        {
+          "row": 10,
+          "timestamp": 1478198408.866339,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 11,
+          "timestamp": 1478198408.866839,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        }
+      ]
+    },
+    {
+      "dataset": "Fuzzy_dataset.csv",
+      "detector": "RuleBasedCanDetector",
+      "evaluated_frames": 9980,
+      "elapsed_seconds": 0.05868643199983126,
+      "frames_per_second": 170056.34283625722,
+      "average_seconds_per_frame": 5.880404007999124e-06,
+      "average_microseconds_per_frame": 5.8804040079991236,
+      "confusion_matrix": {
+        "tp": 1754,
+        "fp": 4180,
+        "tn": 4046,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.5811623246492986,
+        "precision": 0.29558476575665654,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.49185509360564067,
+        "f1": 0.45629552549427677,
+        "false_positive_rate": 0.5081449063943594,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {
+        "unknown_can_id": 1729,
+        "invalid_byte_1_value": 1328,
+        "invalid_byte_4_value": 1269,
+        "invalid_byte_0_value": 1263,
+        "invalid_byte_2_value": 867,
+        "invalid_byte_7_value": 699,
+        "invalid_byte_6_value": 674,
+        "invalid_byte_5_value": 470,
+        "byte_4_out_of_range": 441,
+        "byte_5_out_of_range": 295,
+        "invalid_byte_3_value": 28,
+        "byte_7_out_of_range": 22,
+        "excessive_frequency": 10,
+        "byte_1_out_of_range": 4,
+        "byte_6_out_of_range": 4,
+        "byte_3_out_of_range": 2,
+        "byte_0_out_of_range": 1
+      },
+      "alert_examples": [
+        {
+          "row": 4,
+          "timestamp": 1478195766.067774,
+          "can_id": "0260",
+          "dlc": 8,
+          "payload": [
+            "1a",
+            "23",
+            "23",
+            "30",
+            "08",
+            "8e",
+            "70",
+            "34"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_4_value"
+          ]
+        },
+        {
+          "row": 5,
+          "timestamp": 1478195766.068013,
+          "can_id": "02a0",
+          "dlc": 8,
+          "payload": [
+            "64",
+            "00",
+            "99",
+            "1d",
+            "97",
+            "02",
+            "bd",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value",
+            "invalid_byte_2_value",
+            "invalid_byte_4_value",
+            "invalid_byte_5_value",
+            "invalid_byte_6_value"
+          ]
+        },
+        {
+          "row": 6,
+          "timestamp": 1478195766.068233,
+          "can_id": "0328",
+          "dlc": 8,
+          "payload": [
+            "81",
+            "95",
+            "ad",
+            "cf",
+            "cc",
+            "57",
+            "51",
+            "d9"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 8,
+          "timestamp": 1478195766.068703,
+          "can_id": "0395",
+          "dlc": 8,
+          "payload": [
+            "ec",
+            "46",
+            "0f",
+            "8d",
+            "be",
+            "0b",
+            "74",
+            "f9"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 10,
+          "timestamp": 1478195766.069172,
+          "can_id": "0000",
+          "dlc": 8,
+          "payload": [
+            "5f",
+            "ed",
+            "1b",
+            "79",
+            "5a",
+            "c2",
+            "e8",
+            "89"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 11,
+          "timestamp": 1478195766.06947,
+          "can_id": "014d",
+          "dlc": 8,
+          "payload": [
+            "d8",
+            "c2",
+            "ec",
+            "c9",
+            "48",
+            "50",
+            "27",
+            "90"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 12,
+          "timestamp": 1478195766.069918,
+          "can_id": "0113",
+          "dlc": 8,
+          "payload": [
+            "29",
+            "49",
+            "42",
+            "fa",
+            "00",
+            "0e",
+            "ac",
+            "fb"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "unknown_can_id"
+          ]
+        },
+        {
+          "row": 13,
+          "timestamp": 1478195766.070339,
+          "can_id": "0350",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "20",
+            "34",
+            "68",
+            "79",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_4_value",
+            "byte_7_out_of_range"
+          ]
+        },
+        {
+          "row": 14,
+          "timestamp": 1478195766.070733,
+          "can_id": "0370",
+          "dlc": 8,
+          "payload": [
+            "ee",
+            "83",
+            "fc",
+            "29",
+            "e7",
+            "a2",
+            "d1",
+            "dc"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value",
+            "byte_1_out_of_range",
+            "invalid_byte_2_value",
+            "invalid_byte_3_value",
+            "invalid_byte_4_value",
+            "invalid_byte_5_value",
+            "invalid_byte_6_value",
+            "invalid_byte_7_value"
+          ]
+        },
+        {
+          "row": 15,
+          "timestamp": 1478195766.071269,
+          "can_id": "02c0",
+          "dlc": 8,
+          "payload": [
+            "15",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value"
+          ]
+        }
+      ]
+    },
+    {
+      "dataset": "RPM_dataset.csv",
+      "detector": "RuleBasedCanDetector",
+      "evaluated_frames": 9980,
+      "elapsed_seconds": 0.06051594600012322,
+      "frames_per_second": 164915.21094257833,
+      "average_seconds_per_frame": 6.063722044100523e-06,
+      "average_microseconds_per_frame": 6.0637220441005235,
+      "confusion_matrix": {
+        "tp": 2351,
+        "fp": 3491,
+        "tn": 4138,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.6502004008016032,
+        "precision": 0.40243067442656627,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.5424039847948617,
+        "f1": 0.5739045526669109,
+        "false_positive_rate": 0.45759601520513826,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {
+        "invalid_byte_0_value": 3041,
+        "invalid_byte_7_value": 2986,
+        "excessive_frequency": 2514,
+        "byte_3_out_of_range": 2351,
+        "invalid_byte_1_value": 1246,
+        "invalid_byte_2_value": 840,
+        "invalid_byte_4_value": 836,
+        "invalid_byte_6_value": 626,
+        "invalid_byte_5_value": 455,
+        "byte_4_out_of_range": 425,
+        "byte_5_out_of_range": 250,
+        "invalid_byte_3_value": 5
+      },
+      "alert_examples": [
+        {
+          "row": 1,
+          "timestamp": 1478191049.982599,
+          "can_id": "05a2",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "00",
+            "a5",
+            "01",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value",
+            "invalid_byte_3_value"
+          ]
+        },
+        {
+          "row": 2,
+          "timestamp": 1478191049.984236,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "40",
+            "60",
+            "ff",
+            "71",
+            "a2",
+            "08",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "byte_4_out_of_range"
+          ]
+        },
+        {
+          "row": 5,
+          "timestamp": 1478191049.986136,
+          "can_id": "0350",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "20",
+            "e4",
+            "68",
+            "72",
+            "00",
+            "00",
+            "db"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_4_value"
+          ]
+        },
+        {
+          "row": 6,
+          "timestamp": 1478191049.988564,
+          "can_id": "0316",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "22",
+            "68",
+            "09",
+            "22",
+            "20",
+            "00",
+            "75"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_7_value"
+          ]
+        },
+        {
+          "row": 7,
+          "timestamp": 1478191049.988804,
+          "can_id": "018f",
+          "dlc": 8,
+          "payload": [
+            "fe",
+            "3d",
+            "00",
+            "00",
+            "00",
+            "3c",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value"
+          ]
+        },
+        {
+          "row": 9,
+          "timestamp": 1478191049.989268,
+          "can_id": "02a0",
+          "dlc": 8,
+          "payload": [
+            "60",
+            "00",
+            "84",
+            "1d",
+            "96",
+            "02",
+            "bd",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_2_value",
+            "invalid_byte_4_value",
+            "invalid_byte_5_value",
+            "invalid_byte_6_value"
+          ]
+        },
+        {
+          "row": 12,
+          "timestamp": 1478191049.989991,
+          "can_id": "0153",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "21",
+            "10",
+            "ff",
+            "00",
+            "ff",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_2_value"
+          ]
+        },
+        {
+          "row": 17,
+          "timestamp": 1478191049.991227,
+          "can_id": "02c0",
+          "dlc": 8,
+          "payload": [
+            "15",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value"
+          ]
+        },
+        {
+          "row": 18,
+          "timestamp": 1478191049.994244,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "40",
+            "60",
+            "ff",
+            "71",
+            "a0",
+            "08",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "byte_4_out_of_range"
+          ]
+        },
+        {
+          "row": 21,
+          "timestamp": 1478191049.994969,
+          "can_id": "04f0",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "00",
+            "00",
+            "80",
+            "00",
+            "67",
+            "d1",
+            "13"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "byte_5_out_of_range",
+            "invalid_byte_6_value",
+            "invalid_byte_7_value"
+          ]
+        }
+      ]
+    },
+    {
+      "dataset": "gear_dataset.csv",
+      "detector": "RuleBasedCanDetector",
+      "evaluated_frames": 9980,
+      "elapsed_seconds": 0.06175816099994336,
+      "frames_per_second": 161598.07608275695,
+      "average_seconds_per_frame": 6.188192484964265e-06,
+      "average_microseconds_per_frame": 6.188192484964264,
+      "confusion_matrix": {
+        "tp": 2235,
+        "fp": 3982,
+        "tn": 3637,
+        "fn": 126
+      },
+      "metrics": {
+        "accuracy": 0.588376753507014,
+        "precision": 0.35949815023323145,
+        "recall_tpr": 0.9466327827191868,
+        "specificity_tnr": 0.47735923349520937,
+        "f1": 0.5211004896246211,
+        "false_positive_rate": 0.5226407665047906,
+        "false_negative_rate": 0.053367217280813214
+      },
+      "alert_reason_counts": {
+        "excessive_frequency": 2490,
+        "invalid_byte_1_value": 1276,
+        "invalid_byte_4_value": 1212,
+        "invalid_byte_2_value": 848,
+        "invalid_byte_0_value": 796,
+        "invalid_byte_7_value": 626,
+        "invalid_byte_6_value": 614,
+        "invalid_byte_5_value": 445,
+        "invalid_byte_3_value": 408,
+        "byte_4_out_of_range": 404,
+        "byte_5_out_of_range": 235,
+        "byte_7_out_of_range": 21
+      },
+      "alert_examples": [
+        {
+          "row": 2,
+          "timestamp": 1478193210.532369,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "01",
+            "45",
+            "60",
+            "ff",
+            "6b",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "excessive_frequency"
+          ]
+        },
+        {
+          "row": 5,
+          "timestamp": 1478193210.533117,
+          "can_id": "01f1",
+          "dlc": 8,
+          "payload": [
+            "08",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value"
+          ]
+        },
+        {
+          "row": 6,
+          "timestamp": 1478193210.533356,
+          "can_id": "0153",
+          "dlc": 8,
+          "payload": [
+            "00",
+            "21",
+            "10",
+            "ff",
+            "00",
+            "ff",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value",
+            "invalid_byte_2_value"
+          ]
+        },
+        {
+          "row": 8,
+          "timestamp": 1478193210.533848,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "01",
+            "45",
+            "60",
+            "ff",
+            "6b",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "excessive_frequency"
+          ]
+        },
+        {
+          "row": 9,
+          "timestamp": 1478193210.534232,
+          "can_id": "05f0",
+          "dlc": 2,
+          "payload": [
+            "01",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_0_value"
+          ]
+        },
+        {
+          "row": 10,
+          "timestamp": 1478193210.534635,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "01",
+            "45",
+            "60",
+            "ff",
+            "6b",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "excessive_frequency"
+          ]
+        },
+        {
+          "row": 14,
+          "timestamp": 1478193210.535775,
+          "can_id": "043f",
+          "dlc": 8,
+          "payload": [
+            "01",
+            "45",
+            "60",
+            "ff",
+            "6b",
+            "00",
+            "00",
+            "00"
+          ],
+          "actual_label": "T",
+          "predicted_malicious": true,
+          "reasons": [
+            "excessive_frequency"
+          ]
+        },
+        {
+          "row": 15,
+          "timestamp": 1478193210.536392,
+          "can_id": "0316",
+          "dlc": 8,
+          "payload": [
+            "05",
+            "22",
+            "dc",
+            "08",
+            "22",
+            "21",
+            "00",
+            "70"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_7_value"
+          ]
+        },
+        {
+          "row": 16,
+          "timestamp": 1478193210.536636,
+          "can_id": "018f",
+          "dlc": 8,
+          "payload": [
+            "fe",
+            "51",
+            "00",
+            "00",
+            "00",
+            "3d",
+            "00",
+            "00"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_1_value"
+          ]
+        },
+        {
+          "row": 17,
+          "timestamp": 1478193210.536866,
+          "can_id": "0260",
+          "dlc": 8,
+          "payload": [
+            "1c",
+            "22",
+            "20",
+            "30",
+            "08",
+            "8e",
+            "65",
+            "2f"
+          ],
+          "actual_label": "R",
+          "predicted_malicious": true,
+          "reasons": [
+            "invalid_byte_4_value"
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}
