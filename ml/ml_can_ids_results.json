@@ -1,968 +1,112 @@
 {
-  "input_directory": "../build/heldout_test_data",
+  "input_directory": "/home/justin-tjoa/Documents/cyber-207-can-ids-ml/build/heldout_test_data",
   "successful_datasets": 4,
   "failed_datasets": 0,
-  "total_evaluated_frames": 39920,
-  "total_elapsed_seconds": 34.01201757999979,
-  "overall_frames_per_second": 1173.7027921411607,
-  "overall_average_seconds_per_frame": 0.0008520044483967884,
-  "overall_average_microseconds_per_frame": 852.0044483967885,
+  "total_evaluated_frames": 60000,
+  "total_elapsed_seconds": 49.84594901700075,
+  "overall_frames_per_second": 1203.7086500155922,
+  "overall_average_seconds_per_frame": 0.0008307658169500124,
+  "overall_average_microseconds_per_frame": 830.7658169500124,
   "results": [
     {
       "dataset": "DoS_dataset.csv",
       "detector": "RandomForestCanDetector",
-      "evaluated_frames": 9980,
-      "elapsed_seconds": 8.253820596999958,
-      "frames_per_second": 1209.137015120908,
-      "average_seconds_per_frame": 0.0008270361319639237,
-      "average_microseconds_per_frame": 827.0361319639237,
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 8.032917488999374,
+      "frames_per_second": 1244.8777189227244,
+      "average_seconds_per_frame": 0.0008032917488999373,
+      "average_microseconds_per_frame": 803.2917488999374,
       "confusion_matrix": {
-        "tp": 2423,
-        "fp": 0,
-        "tn": 7556,
-        "fn": 1
+        "tp": 2436,
+        "fp": 1,
+        "tn": 7563,
+        "fn": 0
       },
       "metrics": {
-        "accuracy": 0.9998997995991984,
-        "precision": 1.0,
-        "recall_tpr": 0.9995874587458746,
-        "specificity_tnr": 1.0,
-        "f1": 0.9997936868165876,
-        "false_positive_rate": 0.0,
-        "false_negative_rate": 0.00041254125412541255
+        "accuracy": 0.9999,
+        "precision": 0.9995896594173164,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.9998677948175568,
+        "f1": 0.9997947876051714,
+        "false_positive_rate": 0.00013220518244315177,
+        "false_negative_rate": 0.0
       },
-      "alert_reason_counts": {
-        "random_forest_threshold": 2423
-      },
-      "alert_examples": [
-        {
-          "row": 1,
-          "timestamp": 1478198408.821474,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 5,
-          "timestamp": 1478198408.843736,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 6,
-          "timestamp": 1478198408.849161,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 7,
-          "timestamp": 1478198408.854772,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 10,
-          "timestamp": 1478198408.866339,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 11,
-          "timestamp": 1478198408.866839,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 13,
-          "timestamp": 1478198408.867339,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 14,
-          "timestamp": 1478198408.867833,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 16,
-          "timestamp": 1478198408.868319,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 19,
-          "timestamp": 1478198408.869328,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        }
-      ]
+      "alert_reason_counts": {}
     },
     {
       "dataset": "Fuzzy_dataset.csv",
       "detector": "RandomForestCanDetector",
-      "evaluated_frames": 9980,
-      "elapsed_seconds": 8.297950319999927,
-      "frames_per_second": 1202.7066462359933,
-      "average_seconds_per_frame": 0.0008314579478957843,
-      "average_microseconds_per_frame": 831.4579478957843,
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 8.71679860400036,
+      "frames_per_second": 1147.2101690419631,
+      "average_seconds_per_frame": 0.0008716798604000359,
+      "average_microseconds_per_frame": 871.679860400036,
       "confusion_matrix": {
-        "tp": 1748,
-        "fp": 8,
-        "tn": 8218,
-        "fn": 6
+        "tp": 1731,
+        "fp": 4,
+        "tn": 8232,
+        "fn": 33
       },
       "metrics": {
-        "accuracy": 0.9985971943887776,
-        "precision": 0.9954441913439636,
-        "recall_tpr": 0.9965792474344356,
-        "specificity_tnr": 0.9990274738633601,
-        "f1": 0.9960113960113961,
-        "false_positive_rate": 0.0009725261366399222,
-        "false_negative_rate": 0.0034207525655644243
+        "accuracy": 0.9963,
+        "precision": 0.9976945244956772,
+        "recall_tpr": 0.9812925170068028,
+        "specificity_tnr": 0.9995143273433705,
+        "f1": 0.9894255501571878,
+        "false_positive_rate": 0.00048567265662943174,
+        "false_negative_rate": 0.01870748299319728
       },
-      "alert_reason_counts": {
-        "random_forest_threshold": 1756
-      },
-      "alert_examples": [
-        {
-          "row": 6,
-          "timestamp": 1478195766.068233,
-          "can_id": "0328",
-          "dlc": 8,
-          "payload": [
-            "81",
-            "95",
-            "ad",
-            "cf",
-            "cc",
-            "57",
-            "51",
-            "d9"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 8,
-          "timestamp": 1478195766.068703,
-          "can_id": "0395",
-          "dlc": 8,
-          "payload": [
-            "ec",
-            "46",
-            "0f",
-            "8d",
-            "be",
-            "0b",
-            "74",
-            "f9"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 10,
-          "timestamp": 1478195766.069172,
-          "can_id": "0000",
-          "dlc": 8,
-          "payload": [
-            "5f",
-            "ed",
-            "1b",
-            "79",
-            "5a",
-            "c2",
-            "e8",
-            "89"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 11,
-          "timestamp": 1478195766.06947,
-          "can_id": "014d",
-          "dlc": 8,
-          "payload": [
-            "d8",
-            "c2",
-            "ec",
-            "c9",
-            "48",
-            "50",
-            "27",
-            "90"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 12,
-          "timestamp": 1478195766.069918,
-          "can_id": "0113",
-          "dlc": 8,
-          "payload": [
-            "29",
-            "49",
-            "42",
-            "fa",
-            "00",
-            "0e",
-            "ac",
-            "fb"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 14,
-          "timestamp": 1478195766.070733,
-          "can_id": "0370",
-          "dlc": 8,
-          "payload": [
-            "ee",
-            "83",
-            "fc",
-            "29",
-            "e7",
-            "a2",
-            "d1",
-            "dc"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 16,
-          "timestamp": 1478195766.071558,
-          "can_id": "07f3",
-          "dlc": 8,
-          "payload": [
-            "5c",
-            "36",
-            "95",
-            "d2",
-            "e4",
-            "b3",
-            "c1",
-            "8e"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 20,
-          "timestamp": 1478195766.072531,
-          "can_id": "0193",
-          "dlc": 8,
-          "payload": [
-            "48",
-            "82",
-            "7f",
-            "dc",
-            "ab",
-            "43",
-            "23",
-            "46"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 23,
-          "timestamp": 1478195766.073188,
-          "can_id": "00b1",
-          "dlc": 8,
-          "payload": [
-            "79",
-            "1c",
-            "94",
-            "34",
-            "4f",
-            "11",
-            "07",
-            "b3"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 24,
-          "timestamp": 1478195766.073987,
-          "can_id": "033d",
-          "dlc": 8,
-          "payload": [
-            "08",
-            "93",
-            "88",
-            "9c",
-            "01",
-            "ad",
-            "c6",
-            "f2"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        }
-      ]
+      "alert_reason_counts": {}
     },
     {
       "dataset": "RPM_dataset.csv",
       "detector": "RandomForestCanDetector",
-      "evaluated_frames": 9980,
-      "elapsed_seconds": 8.358714538000186,
-      "frames_per_second": 1193.9634921888007,
-      "average_seconds_per_frame": 0.0008375465468938062,
-      "average_microseconds_per_frame": 837.5465468938062,
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 7.9650081130002945,
+      "frames_per_second": 1255.4915020963056,
+      "average_seconds_per_frame": 0.0007965008113000294,
+      "average_microseconds_per_frame": 796.5008113000295,
       "confusion_matrix": {
         "tp": 2351,
-        "fp": 0,
-        "tn": 7629,
+        "fp": 1,
+        "tn": 7648,
         "fn": 0
       },
       "metrics": {
-        "accuracy": 1.0,
-        "precision": 1.0,
+        "accuracy": 0.9999,
+        "precision": 0.9995748299319728,
         "recall_tpr": 1.0,
-        "specificity_tnr": 1.0,
-        "f1": 1.0,
-        "false_positive_rate": 0.0,
+        "specificity_tnr": 0.9998692639560727,
+        "f1": 0.9997873697639804,
+        "false_positive_rate": 0.00013073604392731077,
         "false_negative_rate": 0.0
       },
-      "alert_reason_counts": {
-        "random_forest_threshold": 2351
-      },
-      "alert_examples": [
-        {
-          "row": 611,
-          "timestamp": 1478191050.314728,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 614,
-          "timestamp": 1478191050.315825,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 616,
-          "timestamp": 1478191050.31702,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 618,
-          "timestamp": 1478191050.318225,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 623,
-          "timestamp": 1478191050.319398,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 631,
-          "timestamp": 1478191050.32135,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 635,
-          "timestamp": 1478191050.322302,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 637,
-          "timestamp": 1478191050.322905,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 638,
-          "timestamp": 1478191050.324027,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 642,
-          "timestamp": 1478191050.325162,
-          "can_id": "0316",
-          "dlc": 8,
-          "payload": [
-            "45",
-            "29",
-            "24",
-            "ff",
-            "29",
-            "24",
-            "00",
-            "ff"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        }
-      ]
+      "alert_reason_counts": {}
     },
     {
       "dataset": "gear_dataset.csv",
       "detector": "RandomForestCanDetector",
-      "evaluated_frames": 9980,
-      "elapsed_seconds": 8.358298543000274,
-      "frames_per_second": 1194.022916106273,
-      "average_seconds_per_frame": 0.0008375048640280835,
-      "average_microseconds_per_frame": 837.5048640280836,
+      "evaluated_frames": 30000,
+      "elapsed_seconds": 24.381231305000256,
+      "frames_per_second": 1230.4546732981205,
+      "average_seconds_per_frame": 0.0008127077101666752,
+      "average_microseconds_per_frame": 812.7077101666753,
       "confusion_matrix": {
-        "tp": 2355,
-        "fp": 0,
-        "tn": 7619,
-        "fn": 6
+        "tp": 0,
+        "fp": 1,
+        "tn": 24636,
+        "fn": 5363
       },
       "metrics": {
-        "accuracy": 0.9993987975951903,
-        "precision": 1.0,
-        "recall_tpr": 0.9974587039390089,
-        "specificity_tnr": 1.0,
-        "f1": 0.9987277353689569,
-        "false_positive_rate": 0.0,
-        "false_negative_rate": 0.0025412960609911056
+        "accuracy": 0.8212,
+        "precision": 0.0,
+        "recall_tpr": 0.0,
+        "specificity_tnr": 0.9999594106425296,
+        "f1": 0.0,
+        "false_positive_rate": 4.058935747047124e-05,
+        "false_negative_rate": 1.0
       },
-      "alert_reason_counts": {
-        "random_forest_threshold": 2355
-      },
-      "alert_examples": [
-        {
-          "row": 1,
-          "timestamp": 1478193210.5314,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 2,
-          "timestamp": 1478193210.532369,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 8,
-          "timestamp": 1478193210.533848,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 10,
-          "timestamp": 1478193210.534635,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 14,
-          "timestamp": 1478193210.535775,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 20,
-          "timestamp": 1478193210.537574,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 22,
-          "timestamp": 1478193210.53816,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 27,
-          "timestamp": 1478193210.539368,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 30,
-          "timestamp": 1478193210.540562,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        },
-        {
-          "row": 31,
-          "timestamp": 1478193210.541496,
-          "can_id": "043f",
-          "dlc": 8,
-          "payload": [
-            "01",
-            "45",
-            "60",
-            "ff",
-            "6b",
-            "00",
-            "00",
-            "00"
-          ],
-          "actual_label": "T",
-          "predicted_malicious": true,
-          "reasons": [
-            "random_forest_threshold"
-          ]
-        }
-      ]
+      "alert_reason_counts": {}
     }
   ],
   "failures": []

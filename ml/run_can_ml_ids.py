@@ -11,19 +11,18 @@ from pathlib import Path
 import joblib
 import numpy as np
 
+MODEL_PATH = Path(__file__).resolve().parent.parent / "build/can_ids_random_forest.joblib"
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from common.can_benchmark import (
     CanDetector,
-    DetectionResult,
     Frame,
-    add_common_arguments,
     run_folder_benchmark,
 )
 from ml.can_ml_features import (
     FEATURE_COLUMNS,
-    SlidingWindowFeatureExtractor,
+    padded_payload
 )
 
 
@@ -32,6 +31,7 @@ warnings.filterwarnings(
     message="X does not have valid feature names",
 )
 
+THRESHOLD = 0.7
 
 class RandomForestCanDetector(CanDetector):
     """ML detector adapter for the shared benchmark interface."""
@@ -41,9 +41,8 @@ class RandomForestCanDetector(CanDetector):
 
         self.model_path = model_path
         self.model = None
-        self.threshold = 0.5
         self.attack_index = 1
-        self.extractor: SlidingWindowFeatureExtractor | None = None
+        self._last_time_of_id = {}
 
         # Reuse one NumPy buffer for every frame instead of allocating
         # a new array on each prediction.
@@ -52,42 +51,59 @@ class RandomForestCanDetector(CanDetector):
             dtype=np.float64,
         )
 
-    def fit(self, calibration_frames: list[Frame]) -> None:
-        """Load the trained model and reset streaming state."""
+    def init(self) -> None:
+        self._last_time_of_id = {}
+        if not self.ready: 
+            """Load the trained model and reset streaming state."""
 
-        bundle = joblib.load(self.model_path)
+            bundle = joblib.load(self.model_path)
 
-        if list(bundle["feature_columns"]) != FEATURE_COLUMNS:
-            raise ValueError(
-                "Saved model feature schema does not match this detector"
-            )
+            if list(bundle["feature_columns"]) != FEATURE_COLUMNS:
+                raise ValueError(
+                    "Saved model feature schema does not match this detector"
+                )
 
-        self.model = bundle["model"]
+            self.model = bundle["model"]
 
-        # For one-row predictions, parallel job setup is slower than
-        # evaluating the trees on one thread.
-        self.model.n_jobs = 1
+            # For one-row predictions, parallel job setup is slower than
+            # evaluating the trees on one thread.
+            self.model.n_jobs = 1
 
-        try:
-            self.attack_index = list(self.model.classes_).index(1)
-        except ValueError as exc:
-            raise RuntimeError(
-                f"Model has no attack class 1; "
-                f"classes={self.model.classes_}"
-            ) from exc
+            try:
+                self.attack_index = list(self.model.classes_).index(1)
+            except ValueError as exc:
+                raise RuntimeError(
+                    f"Model has no attack class 1; "
+                    f"classes={self.model.classes_}"
+                ) from exc
 
-        self.threshold = float(bundle["threshold"])
-        self.extractor = SlidingWindowFeatureExtractor(
-            int(bundle["window_size"])
-        )
+            self.ready = True
 
-        self.ready = True
+    def extract(self, frame: Frame) -> list[float]:
+        if self._last_time_of_id.get(frame.can_id) is not None:
+            time_since_last_submission = frame.timestamp - self._last_time_of_id[frame.can_id]
+        else:
+            time_since_last_submission = 0
 
-    def predict(self, frame: Frame) -> DetectionResult:
-        if not self.ready or self.model is None or self.extractor is None:
+        self._last_time_of_id[frame.can_id] = frame.timestamp
+
+        current_payload = np.asarray(padded_payload(frame), dtype=np.uint8)
+        payload_float = current_payload.astype(float)
+
+        features = [
+            float(int(frame.can_id, 16)),
+            float(frame.dlc),
+            float(time_since_last_submission),
+            *payload_float.tolist(),
+        ]
+
+        return features
+
+    def predict_is_malicious(self, frame: Frame) -> bool:
+        if not self.ready or self.model is None:
             raise RuntimeError("Detector must be fitted before prediction")
 
-        features = self.extractor.extract(frame)
+        features = self.extract(frame)
 
         # Copy into the already allocated buffer.
         self.feature_vector[0, :] = features
@@ -98,48 +114,15 @@ class RandomForestCanDetector(CanDetector):
             )[0, self.attack_index]
         )
 
-        malicious = probability >= self.threshold
-
-        return DetectionResult(
-            malicious=malicious,
-            reasons=(
-                ("random_forest_threshold",)
-                if malicious
-                else ()
-            ),
-        )
-
-
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description=__doc__)
-    add_common_arguments(parser)
-
-    parser.set_defaults(
-        input_dir=Path("../build/heldout_test_data"),
-    )
-
-    parser.add_argument(
-        "--model",
-        type=Path,
-        default=Path("../build/can_ids_random_forest.joblib"),
-    )
-
-    return parser
-
-
-def detector_factory(
-    args: argparse.Namespace,
-) -> RandomForestCanDetector:
-    return RandomForestCanDetector(args.model)
+        return (probability >= THRESHOLD)
 
 
 def main() -> None:
-    args = build_parser().parse_args()
-
+    detector = RandomForestCanDetector(
+        model_path=MODEL_PATH
+    )
     run_folder_benchmark(
-        args=args,
-        detector_factory=detector_factory,
-        training_data=[],
+        detector=detector,
         label="ml",
     )
 

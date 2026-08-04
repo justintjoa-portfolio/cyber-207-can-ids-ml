@@ -1,0 +1,113 @@
+{
+  "input_directory": "/home/justin-tjoa/Documents/cyber-207-can-ids-ml/build/heldout_test_data",
+  "successful_datasets": 4,
+  "failed_datasets": 0,
+  "total_evaluated_frames": 40000,
+  "total_elapsed_seconds": 0.18603092400002197,
+  "overall_frames_per_second": 215018.01496183116,
+  "overall_average_seconds_per_frame": 4.6507731000005496e-06,
+  "overall_average_microseconds_per_frame": 4.650773100000549,
+  "results": [
+    {
+      "dataset": "DoS_dataset.csv",
+      "detector": "DbcSpecificationCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 0.046673585000007733,
+      "frames_per_second": 214253.95113742267,
+      "average_seconds_per_frame": 4.6673585000007736e-06,
+      "average_microseconds_per_frame": 4.667358500000773,
+      "confusion_matrix": {
+        "tp": 2284,
+        "fp": 3433,
+        "tn": 4283,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.6567,
+        "precision": 0.39951023263949625,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.5550803525142561,
+        "f1": 0.5709286339207599,
+        "false_positive_rate": 0.4449196474857439,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "Fuzzy_dataset.csv",
+      "detector": "DbcSpecificationCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 0.046571864000043206,
+      "frames_per_second": 214721.91879609376,
+      "average_seconds_per_frame": 4.6571864000043206e-06,
+      "average_microseconds_per_frame": 4.657186400004321,
+      "confusion_matrix": {
+        "tp": 1217,
+        "fp": 3801,
+        "tn": 4982,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.6199,
+        "precision": 0.24252690314866482,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.5672321530228851,
+        "f1": 0.39037690457097035,
+        "false_positive_rate": 0.4327678469771149,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "RPM_dataset.csv",
+      "detector": "DbcSpecificationCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 0.04592373799999905,
+      "frames_per_second": 217752.30927413199,
+      "average_seconds_per_frame": 4.592373799999904e-06,
+      "average_microseconds_per_frame": 4.592373799999905,
+      "confusion_matrix": {
+        "tp": 1889,
+        "fp": 3166,
+        "tn": 4945,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 0.6834,
+        "precision": 0.37368941641938674,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.6096658858340526,
+        "f1": 0.5440668202764977,
+        "false_positive_rate": 0.3903341141659475,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "gear_dataset.csv",
+      "detector": "DbcSpecificationCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 0.046418586000015694,
+      "frames_per_second": 215430.94828430619,
+      "average_seconds_per_frame": 4.64185860000157e-06,
+      "average_microseconds_per_frame": 4.641858600001569,
+      "confusion_matrix": {
+        "tp": 0,
+        "fp": 3715,
+        "tn": 4455,
+        "fn": 1830
+      },
+      "metrics": {
+        "accuracy": 0.4455,
+        "precision": 0.0,
+        "recall_tpr": 0.0,
+        "specificity_tnr": 0.5452876376988984,
+        "f1": 0.0,
+        "false_positive_rate": 0.45471236230110157,
+        "false_negative_rate": 1.0
+      },
+      "alert_reason_counts": {}
+    }
+  ],
+  "failures": []
+}
