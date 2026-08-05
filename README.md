@@ -1,6 +1,10 @@
 CYBER 207 ML based CAN IDS system 
 
-Please first run pip install -r requirements.txt
+Please uncompress the data into original_input_data folder. You can request the file from us. 
+
+You can copy the tarball into original_input_data and run the uncompress_input_data.sh script.
+
+Run pip install -r requirements.txt
 
 To train the model (required to also form held-out data set for conventional and ml ids) run
 
