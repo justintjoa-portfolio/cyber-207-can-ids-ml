@@ -1,2 +1,3 @@
-original_input_data/*
+original_input_data/*.csv
+original_input_data/*.txt
 build/*

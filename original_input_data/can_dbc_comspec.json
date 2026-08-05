@@ -1,0 +1,1029 @@
+{
+  "type": "inferred_can_dbc_spec",
+  "source": "normal_run_data.txt",
+  "description": "An inferred frame-level CAN specification generated from known-normal traffic. This is not the vehicle manufacturer's original DBC.",
+  "validation_policy": {
+    "unknown_can_id": "malicious",
+    "unexpected_dlc": "malicious",
+    "payload_byte_out_of_range": "malicious"
+  },
+  "messages": [
+    {
+      "can_id": 2,
+      "can_id_hex": "0x002",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 12
+        },
+        {
+          "min": 0,
+          "max": 17
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 160,
+      "can_id_hex": "0x0A0",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 39,
+          "max": 255
+        },
+        {
+          "min": 121,
+          "max": 137
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 5,
+          "max": 37
+        },
+        {
+          "min": 0,
+          "max": 54
+        },
+        {
+          "min": 26,
+          "max": 101
+        },
+        {
+          "min": 0,
+          "max": 6
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 161,
+      "can_id_hex": "0x0A1",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 105,
+          "max": 158
+        },
+        {
+          "min": 126,
+          "max": 133
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 14,
+          "max": 106
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 304,
+      "can_id_hex": "0x130",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 101,
+          "max": 149
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 253,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 111,
+          "max": 139
+        },
+        {
+          "min": 0,
+          "max": 17
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 305,
+      "can_id_hex": "0x131",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 124,
+          "max": 133
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 116,
+          "max": 140
+        },
+        {
+          "min": 0,
+          "max": 17
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 320,
+      "can_id_hex": "0x140",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 39
+        },
+        {
+          "min": 0,
+          "max": 56
+        },
+        {
+          "min": 30,
+          "max": 49
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 339,
+      "can_id_hex": "0x153",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 253,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 253,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 399,
+      "can_id_hex": "0x18F",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 252,
+          "max": 255
+        },
+        {
+          "min": 41,
+          "max": 56
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 50,
+          "max": 172
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 497,
+      "can_id_hex": "0x1F1",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 27
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 27
+        }
+      ]
+    },
+    {
+      "can_id": 608,
+      "can_id_hex": "0x260",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 130
+        },
+        {
+          "min": 0,
+          "max": 173
+        },
+        {
+          "min": 0,
+          "max": 191
+        },
+        {
+          "min": 46,
+          "max": 50
+        },
+        {
+          "min": 253,
+          "max": 255
+        },
+        {
+          "min": 136,
+          "max": 192
+        },
+        {
+          "min": 55,
+          "max": 237
+        },
+        {
+          "min": 0,
+          "max": 140
+        }
+      ]
+    },
+    {
+      "can_id": 672,
+      "can_id_hex": "0x2A0",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 106
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 104,
+          "max": 119
+        },
+        {
+          "min": 27,
+          "max": 31
+        },
+        {
+          "min": 0,
+          "max": 3
+        },
+        {
+          "min": 2,
+          "max": 6
+        },
+        {
+          "min": 219,
+          "max": 223
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 688,
+      "can_id_hex": "0x2B0",
+      "dlc": 5,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 149
+        },
+        {
+          "min": 5,
+          "max": 9
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 704,
+      "can_id_hex": "0x2C0",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 18,
+          "max": 22
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 790,
+      "can_id_hex": "0x316",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 58
+        },
+        {
+          "min": 0,
+          "max": 173
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 5,
+          "max": 37
+        },
+        {
+          "min": 0,
+          "max": 173
+        },
+        {
+          "min": 14,
+          "max": 62
+        },
+        {
+          "min": 0,
+          "max": 54
+        },
+        {
+          "min": 119,
+          "max": 127
+        }
+      ]
+    },
+    {
+      "can_id": 809,
+      "can_id_hex": "0x329",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 241
+        },
+        {
+          "min": 173,
+          "max": 193
+        },
+        {
+          "min": 124,
+          "max": 129
+        },
+        {
+          "min": 18,
+          "max": 22
+        },
+        {
+          "min": 15,
+          "max": 20
+        },
+        {
+          "min": 25,
+          "max": 108
+        },
+        {
+          "min": 0,
+          "max": 76
+        },
+        {
+          "min": 18,
+          "max": 22
+        }
+      ]
+    },
+    {
+      "can_id": 848,
+      "can_id_hex": "0x350",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 3,
+          "max": 7
+        },
+        {
+          "min": 38,
+          "max": 42
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 100,
+          "max": 107
+        },
+        {
+          "min": 103,
+          "max": 112
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 880,
+      "can_id_hex": "0x370",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 91
+        },
+        {
+          "min": 9,
+          "max": 68
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 17
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1072,
+      "can_id_hex": "0x430",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1087,
+      "can_id_hex": "0x43F",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 224
+        },
+        {
+          "min": 62,
+          "max": 81
+        },
+        {
+          "min": 94,
+          "max": 98
+        },
+        {
+          "min": 253,
+          "max": 255
+        },
+        {
+          "min": 88,
+          "max": 110
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 37
+        },
+        {
+          "min": 0,
+          "max": 30
+        }
+      ]
+    },
+    {
+      "can_id": 1088,
+      "can_id_hex": "0x440",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 15,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 16
+        },
+        {
+          "min": 0,
+          "max": 54
+        },
+        {
+          "min": 0,
+          "max": 141
+        },
+        {
+          "min": 83,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 37
+        },
+        {
+          "min": 0,
+          "max": 141
+        }
+      ]
+    },
+    {
+      "can_id": 1201,
+      "can_id_hex": "0x4B1",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 255
+        }
+      ]
+    },
+    {
+      "can_id": 1264,
+      "can_id_hex": "0x4F0",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 110
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 126,
+          "max": 130
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 77,
+          "max": 98
+        },
+        {
+          "min": 1,
+          "max": 5
+        },
+        {
+          "min": 18,
+          "max": 22
+        }
+      ]
+    },
+    {
+      "can_id": 1349,
+      "can_id_hex": "0x545",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 214,
+          "max": 218
+        },
+        {
+          "min": 0,
+          "max": 255
+        },
+        {
+          "min": 0,
+          "max": 3
+        },
+        {
+          "min": 125,
+          "max": 148
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1440,
+      "can_id_hex": "0x5A0",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1442,
+      "can_id_hex": "0x5A2",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 2,
+          "max": 6
+        },
+        {
+          "min": 0,
+          "max": 145
+        },
+        {
+          "min": 143,
+          "max": 167
+        },
+        {
+          "min": 1,
+          "max": 5
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1520,
+      "can_id_hex": "0x5F0",
+      "dlc": 2,
+      "byte_ranges": [
+        {
+          "min": 242,
+          "max": 246
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "can_id": 1680,
+      "can_id_hex": "0x690",
+      "dlc": 8,
+      "byte_ranges": [
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 158,
+          "max": 162
+        },
+        {
+          "min": 31,
+          "max": 36
+        },
+        {
+          "min": 0,
+          "max": 2
+        },
+        {
+          "min": 0,
+          "max": 2
+        }
+      ]
+    }
+  ]
+}
