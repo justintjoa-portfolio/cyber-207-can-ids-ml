@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """Train a Random Forest CAN IDS using the shared benchmark parser.
 
-The split is chronological within every CSV:
+Each CSV is split using chronological splitting:
 
-    first 60%  -> training
-    next 20%   -> validation
-    final 20%  -> held-out testing
+    60% -> training
+    20% -> validation
+    20% -> held-out testing
 
-A purge gap equal to the sliding-window size is removed at each boundary.
-That prevents overlapping neighboring windows from appearing in two splits.
+Chronological splitting keeps the temporal order of the data.
 """
 
 from __future__ import annotations
@@ -26,33 +25,73 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_recall_curve
 
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+
 from common.can_benchmark import (
-    ATTACK_LABEL,
+    HELDOUT_DATA_DIR,
     Frame,
     calculate_metrics,
     find_csv_datasets,
     parse_frames,
 )
+
 from ml.can_ml_features import (
     FEATURE_COLUMNS,
-    SlidingWindowFeatureExtractor,
     target_from_frame,
 )
 
+ORIGINAL_INPUT_DATA_PATH = PROJECT_ROOT / "original_input_data"
 
+MODEL_OUTPUT_PATH = (
+    PROJECT_ROOT / "build/can_ids_random_forest.joblib"
+)
+
+MAX_FRAMES_PER_FILE = 50000
+WINDOW_SIZE = 20
+SPLIT_BLOCK_SIZE = 1000
+THRESHOLD = 0.7
+DISCOUNTED_CSV = "gear_dataset.csv"
+DISCOUNTED_CSV_MAX_FRAMES = 30000
+DISCARD_GEAR_SET = True
+
+
+# Given a list of CAN frames from CSV, build 
+# a list of feature rows for training/testing.
 def build_feature_rows(
-    frames: list[Frame],
-    window_size: int,
+    frames: list[Frame]
 ) -> list[dict[str, object]]:
-    extractor = SlidingWindowFeatureExtractor(window_size)
     rows: list[dict[str, object]] = []
+    id_to_last_time: dict[str, float] = {}
 
     for frame in frames:
-        values = extractor.extract(frame)
-        row = dict(zip(FEATURE_COLUMNS, values))
+        payload = list(frame.payload[:8])
+        payload += [0] * (8 - len(payload))
+
+        if frame.can_id in id_to_last_time:
+            time_since_last_submission = frame.timestamp - id_to_last_time[frame.can_id]
+        else:
+            time_since_last_submission = 0
+
+        id_to_last_time[frame.can_id] = frame.timestamp
+
+        values = [
+            float(int(frame.can_id, 16)),
+            float(frame.dlc),
+            float(time_since_last_submission),
+            *[float(value) for value in payload],
+        ]
+
+        row = dict(
+            zip(
+                FEATURE_COLUMNS,
+                values,
+                strict=True,
+            )
+        )
+
         row.update(
             {
                 "target": target_from_frame(frame),
@@ -60,38 +99,40 @@ def build_feature_rows(
                 "timestamp": frame.timestamp,
             }
         )
+
         rows.append(row)
 
     return rows
 
 
-def split_rows(
-    rows: list[dict[str, object]],
-    purge_gap: int,
+# Split our dataset into training, validation, and held-out testing splits.
+# The decision not to use stratified splitting is deliberate
+# and explained in our design doc. 
+def split_frames(
+    frames: list[Frame],
 ) -> tuple[
-    list[dict[str, object]],
-    list[dict[str, object]],
-    list[dict[str, object]],
+    list[Frame],
+    list[Frame],
+    list[Frame],
 ]:
-    n_rows = len(rows)
-    train_boundary = int(n_rows * 0.60)
-    validation_boundary = int(n_rows * 0.80)
+    train_end = int(len(frames) * 0.60)
+    validation_end = int(len(frames) * 0.80)
 
-    train_stop = max(0, train_boundary - purge_gap)
-    validation_start = min(n_rows, train_boundary + purge_gap)
-    validation_stop = max(
-        validation_start,
-        validation_boundary - purge_gap,
-    )
-    test_start = min(n_rows, validation_boundary + purge_gap)
+    train_frames = frames[:train_end]
+    validation_frames = frames[
+        train_end:validation_end
+    ]
+    test_frames = frames[
+        validation_end:
+    ]
 
     return (
-        rows[:train_stop],
-        rows[validation_start:validation_stop],
-        rows[test_start:],
+        train_frames,
+        validation_frames,
+        test_frames,
     )
 
-
+# Get feature matrix and target vector from a list of feature rows.
 def rows_to_xy(
     rows: list[dict[str, object]],
 ) -> tuple[pd.DataFrame, pd.Series]:
@@ -100,7 +141,10 @@ def rows_to_xy(
     if table.empty:
         raise ValueError("A data split is empty")
 
-    return table[FEATURE_COLUMNS], table["target"].astype(int)
+    return (
+        table[FEATURE_COLUMNS],
+        table["target"].astype(int),
+    )
 
 
 def attack_probability(
@@ -108,26 +152,8 @@ def attack_probability(
     features: pd.DataFrame,
 ) -> np.ndarray:
     attack_index = list(model.classes_).index(1)
+
     return model.predict_proba(features)[:, attack_index]
-
-
-def choose_threshold(
-    labels: pd.Series,
-    probabilities: np.ndarray,
-) -> float:
-    precision, recall, thresholds = precision_recall_curve(
-        labels,
-        probabilities,
-    )
-
-    if len(thresholds) == 0:
-        return 0.5
-
-    f1_values = (
-        2 * precision[:-1] * recall[:-1]
-        / np.maximum(precision[:-1] + recall[:-1], 1e-12)
-    )
-    return float(thresholds[int(np.nanargmax(f1_values))])
 
 
 def confusion_counts(
@@ -135,10 +161,21 @@ def confusion_counts(
     probabilities: np.ndarray,
     threshold: float,
 ) -> Counter[str]:
-    predictions = (probabilities >= threshold).astype(int)
-    counts: Counter[str] = Counter(tp=0, fp=0, tn=0, fn=0)
+    predictions = (
+        probabilities >= threshold
+    ).astype(int)
 
-    for actual, predicted in zip(labels, predictions):
+    counts: Counter[str] = Counter(
+        tp=0,
+        fp=0,
+        tn=0,
+        fn=0,
+    )
+
+    for actual, predicted in zip(
+        labels,
+        predictions,
+    ):
         if predicted == 1 and actual == 1:
             counts["tp"] += 1
         elif predicted == 1 and actual == 0:
@@ -157,13 +194,21 @@ def print_metrics(
     probabilities: np.ndarray,
     threshold: float,
 ) -> dict[str, object]:
-    counts = confusion_counts(labels, probabilities, threshold)
+    counts = confusion_counts(
+        labels,
+        probabilities,
+        threshold,
+    )
+
     metrics = calculate_metrics(counts)
 
     print(f"\n--- {name} ---")
+
     print(
-        f"TP={counts['tp']:,}  FP={counts['fp']:,}  "
-        f"FN={counts['fn']:,}  TN={counts['tn']:,}"
+        f"TP={counts['tp']:,}  "
+        f"FP={counts['fp']:,}  "
+        f"FN={counts['fn']:,}  "
+        f"TN={counts['tn']:,}"
     )
 
     for metric_name, value in metrics.items():
@@ -175,12 +220,22 @@ def print_metrics(
     }
 
 
-def write_frames(path: Path, frames: list[Frame]) -> None:
+def write_frames(
+    path: Path,
+    frames: list[Frame],
+) -> None:
     """Write normalized held-out rows in the format parse_frames accepts."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
-    with path.open("w", newline="", encoding="utf-8") as stream:
+    with path.open(
+        "w",
+        newline="",
+        encoding="utf-8",
+    ) as stream:
         writer = csv.writer(stream)
 
         for frame in frames:
@@ -189,118 +244,133 @@ def write_frames(path: Path, frames: list[Frame]) -> None:
                     f"{frame.timestamp:.6f}",
                     frame.can_id,
                     frame.dlc,
-                    *[f"{value:02X}" for value in frame.payload],
+                    *[
+                        f"{value:02X}"
+                        for value in frame.payload
+                    ],
                     frame.label,
                 ]
             )
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--input-dir",
-        type=Path,
-        default=Path("../original_input_data"),
+    datasets = find_csv_datasets(
+        ORIGINAL_INPUT_DATA_PATH
     )
-    parser.add_argument(
-        "--model-output",
-        type=Path,
-        default=Path("../build/can_ids_random_forest.joblib"),
-    )
-    parser.add_argument(
-        "--heldout-output-dir",
-        type=Path,
-        default=Path("../build/heldout_test_data"),
-        help=(
-            "The final chronological test portions are written here so the "
-            "normal common.run_folder_benchmark flow can evaluate them."
-        ),
-    )
-    parser.add_argument("--window-size", type=int, default=20)
-    parser.add_argument(
-        "--max-frames-per-file",
-        type=int,
-        default=50000,
-        help=(
-            "Optional chronological cap for a quicker experiment. "
-            "Zero uses every frame. Frames are never randomly shuffled."
-        ),
-    )
-    args = parser.parse_args()
-
-    datasets = find_csv_datasets(args.input_dir)
 
     all_train_rows: list[dict[str, object]] = []
     all_validation_rows: list[dict[str, object]] = []
-    all_test_rows: list[dict[str, object]] = []
-
-    args.heldout_output_dir.mkdir(parents=True, exist_ok=True)
 
     for path in datasets:
         frames = list(parse_frames(path))
 
-        if args.max_frames_per_file > 0:
-            frames = frames[: args.max_frames_per_file]
-
-        if len(frames) < args.window_size * 6:
-            print(f"[!] Skipping {path.name}: only {len(frames):,} frames")
+        if len(frames) < WINDOW_SIZE * 6:
+            print(
+                f"[!] Skipping {path.name}: "
+                f"only {len(frames):,} frames"
+            )
             continue
 
-        feature_rows = build_feature_rows(frames, args.window_size)
-        train_rows, validation_rows, test_rows = split_rows(
-            feature_rows,
-            purge_gap=args.window_size,
+        # Please only run this if you want the gear dataset to be
+        # completely excluded from training. 
+        if DISCARD_GEAR_SET and path.name == DISCOUNTED_CSV:
+            frames = frames[:DISCOUNTED_CSV_MAX_FRAMES]
+            write_frames(
+                HELDOUT_DATA_DIR / path.name,
+                frames,
+            )
+
+            print(
+                f"[*] {path.name}: completely excluded from training; "
+                f"saved {len(frames):,} frames for external testing"
+            )
+
+            continue
+
+        frames = frames[:MAX_FRAMES_PER_FILE]
+            
+
+        train_frames, validation_frames, test_frames = (
+            split_frames(frames)
         )
 
-        all_train_rows.extend(train_rows)
-        all_validation_rows.extend(validation_rows)
-        all_test_rows.extend(test_rows)
+        # This is crucial - it checks that the training, validation, and
+        # test splits all contain both normal and attack frames. If it didn't
+        # check this, the model could be trained on only normal frames and
+        # then fail to detect attacks in the validation or test splits.
+        print(
+            f"    classes: "
+            f"train={dict(Counter(target_from_frame(frame) for frame in train_frames))}, "
+            f"validation={dict(Counter(target_from_frame(frame) for frame in validation_frames))}, "
+            f"test={dict(Counter(target_from_frame(frame) for frame in test_frames))}"
+        )
 
-        test_row_numbers = {
-            int(row["row_number"])
-            for row in test_rows
-        }
-        heldout_frames = [
-            frame
-            for frame in frames
-            if frame.row_number in test_row_numbers
-        ]
+        train_rows = build_feature_rows(
+            train_frames
+        )
+
+        validation_rows = build_feature_rows(
+            validation_frames
+        )
+
+        all_train_rows.extend(
+            train_rows
+        )
+
+        all_validation_rows.extend(
+            validation_rows
+        )
+
         write_frames(
-            args.heldout_output_dir / path.name,
-            heldout_frames,
+            HELDOUT_DATA_DIR / path.name,
+            test_frames,
         )
 
         print(
-            f"[*] {path.name}: total={len(frames):,}, "
+            f"[*] {path.name}: "
+            f"total={len(frames):,}, "
             f"train={len(train_rows):,}, "
-            f"validation={len(validation_rows):,}, "
-            f"test={len(test_rows):,}"
+            f"validation={len(validation_rows):,}"
         )
 
-    X_train, y_train = rows_to_xy(all_train_rows)
-    X_validation, y_validation = rows_to_xy(all_validation_rows)
-    X_test, y_test = rows_to_xy(all_test_rows)
+    X_train, y_train = rows_to_xy(
+        all_train_rows
+    )
+
+    X_validation, y_validation = rows_to_xy(
+        all_validation_rows
+    )
+
 
     if y_train.nunique() < 2:
-        raise ValueError("Training split must contain normal and attack frames")
+        raise ValueError(
+            "Training split must contain normal and attack frames"
+        )
 
+    # The choice behind this was on a balance of accuracy
+    # while being reasonable to training time. 
+    # The model is small enough to train quickly, 
+    # but large enough to capture the patterns in the data.
     candidates = [
-    {
-        "n_estimators": 10,
-        "max_depth": 5,
-        "min_samples_leaf": 20,
-    },
-    {
-        "n_estimators": 25,
-        "max_depth": 8,
-        "min_samples_leaf": 10,
-    },
-]
+        {
+            "n_estimators": 10,
+            "max_depth": 5,
+            "min_samples_leaf": 20,
+        },
+        {
+            "n_estimators": 25,
+            "max_depth": 8,
+            "min_samples_leaf": 10,
+        },
+    ]
 
     best_model: RandomForestClassifier | None = None
     best_threshold = 0.5
     best_validation_f1 = -1.0
-    candidate_results: list[dict[str, object]] = []
+
+    candidate_results: list[
+        dict[str, object]
+    ] = []
 
     for parameters in candidates:
         model = RandomForestClassifier(
@@ -311,90 +381,120 @@ def main() -> None:
             random_state=42,
             n_jobs=-1,
         )
-        model.fit(X_train, y_train)
 
-        probabilities = attack_probability(model, X_validation)
-        threshold = choose_threshold(y_validation, probabilities)
+        model.fit(
+            X_train,
+            y_train,
+        )
+
+        probabilities = attack_probability(
+            model,
+            X_validation,
+        )
+
         counts = confusion_counts(
             y_validation,
             probabilities,
-            threshold,
+            THRESHOLD,
         )
+
         metrics = calculate_metrics(counts)
         validation_f1 = metrics["f1"]
 
         result = {
             **parameters,
-            "threshold": threshold,
+            "threshold": THRESHOLD,
             "validation_f1": validation_f1,
         }
+
         candidate_results.append(result)
+
         print(f"[*] Candidate: {result}")
 
         if validation_f1 > best_validation_f1:
             best_validation_f1 = validation_f1
             best_model = model
-            best_threshold = threshold
+            best_threshold = THRESHOLD
 
     if best_model is None:
-        raise RuntimeError("No model was trained")
+        raise RuntimeError(
+            "No model was trained"
+        )
 
     validation_result = print_metrics(
         "Validation",
         y_validation,
-        attack_probability(best_model, X_validation),
-        best_threshold,
-    )
-    test_result = print_metrics(
-        "Held-out chronological test",
-        y_test,
-        attack_probability(best_model, X_test),
+        attack_probability(
+            best_model,
+            X_validation,
+        ),
         best_threshold,
     )
 
     feature_importance = sorted(
-        zip(FEATURE_COLUMNS, best_model.feature_importances_),
+        zip(
+            FEATURE_COLUMNS,
+            best_model.feature_importances_,
+            strict=True,
+        ),
         key=lambda item: item[1],
         reverse=True,
     )
 
-    print("\n--- Feature importance ---")
-    for name, importance in feature_importance:
-        print(f"{name:28s} {importance:.6f}")
-
     bundle = {
         "model": best_model,
         "threshold": best_threshold,
-        "window_size": args.window_size,
+        "window_size": WINDOW_SIZE,
         "feature_columns": FEATURE_COLUMNS,
-        "split_strategy": "chronological_60_20_20_with_purge_gap",
+        "split_strategy": "chronological_60_20_20",
     }
 
-    joblib.dump(bundle, args.model_output)
-    print(f"\n[+] Saved model to {args.model_output}")
-    print(
-        f"[+] Saved held-out CSV files to "
-        f"{args.heldout_output_dir}"
+    MODEL_OUTPUT_PATH.parent.mkdir(
+        parents=True,
+        exist_ok=True,
     )
 
-    summary_path = args.model_output.with_suffix(".metrics.json")
+    joblib.dump(
+        bundle,
+        MODEL_OUTPUT_PATH,
+        compress=3,
+    )
+
+    print(
+        f"\n[+] Saved model to "
+        f"{MODEL_OUTPUT_PATH}"
+    )
+
+    print(
+        f"[+] Saved held-out CSV files to "
+        f"{HELDOUT_DATA_DIR.resolve()}/"
+    )
+
+    summary_path = (
+        MODEL_OUTPUT_PATH.with_suffix(
+            ".metrics.json"
+        )
+    )
+
     summary_path.write_text(
         json.dumps(
             {
                 "candidate_results": candidate_results,
                 "selected_threshold": best_threshold,
                 "validation": validation_result,
-                "test": test_result,
                 "feature_importance": feature_importance,
                 "training_rows": len(X_train),
-                "validation_rows": len(X_validation),
-                "test_rows": len(X_test),
+                "validation_rows": len(X_validation)
             },
             indent=2,
         ),
         encoding="utf-8",
     )
-    print(f"[+] Saved metrics to {summary_path}")
+
+    print(
+        f"[+] Saved metrics to "
+        f"{summary_path}"
+    )
 
 
 if __name__ == "__main__":

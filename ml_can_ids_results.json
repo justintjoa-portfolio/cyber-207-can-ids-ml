@@ -1,0 +1,113 @@
+{
+  "input_directory": "/home/justin-tjoa/Documents/cyber-207-can-ids-ml/build/heldout_test_data",
+  "successful_datasets": 4,
+  "failed_datasets": 0,
+  "total_evaluated_frames": 40000,
+  "total_elapsed_seconds": 30.529423329999986,
+  "overall_frames_per_second": 1310.2114497096863,
+  "overall_average_seconds_per_frame": 0.0007632355832499996,
+  "overall_average_microseconds_per_frame": 763.2355832499996,
+  "results": [
+    {
+      "dataset": "DoS_dataset.csv",
+      "detector": "RandomForestCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 7.423608221999984,
+      "frames_per_second": 1347.0538451052464,
+      "average_seconds_per_frame": 0.0007423608221999985,
+      "average_microseconds_per_frame": 742.3608221999984,
+      "confusion_matrix": {
+        "tp": 2284,
+        "fp": 0,
+        "tn": 7716,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "Fuzzy_dataset.csv",
+      "detector": "RandomForestCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 7.5088130420000425,
+      "frames_per_second": 1331.7684092100403,
+      "average_seconds_per_frame": 0.0007508813042000043,
+      "average_microseconds_per_frame": 750.8813042000043,
+      "confusion_matrix": {
+        "tp": 1199,
+        "fp": 1,
+        "tn": 8782,
+        "fn": 18
+      },
+      "metrics": {
+        "accuracy": 0.9981,
+        "precision": 0.9991666666666666,
+        "recall_tpr": 0.9852095316351684,
+        "specificity_tnr": 0.9998861436866674,
+        "f1": 0.9921390153082333,
+        "false_positive_rate": 0.00011385631333257428,
+        "false_negative_rate": 0.014790468364831553
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "RPM_dataset.csv",
+      "detector": "RandomForestCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 7.392761029999974,
+      "frames_per_second": 1352.6745906461465,
+      "average_seconds_per_frame": 0.0007392761029999974,
+      "average_microseconds_per_frame": 739.2761029999974,
+      "confusion_matrix": {
+        "tp": 1889,
+        "fp": 0,
+        "tn": 8111,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    },
+    {
+      "dataset": "gear_dataset.csv",
+      "detector": "RandomForestCanDetector",
+      "evaluated_frames": 10000,
+      "elapsed_seconds": 7.497786324000003,
+      "frames_per_second": 1333.7269919243427,
+      "average_seconds_per_frame": 0.0007497786324000003,
+      "average_microseconds_per_frame": 749.7786324000003,
+      "confusion_matrix": {
+        "tp": 1830,
+        "fp": 0,
+        "tn": 8170,
+        "fn": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "alert_reason_counts": {}
+    }
+  ],
+  "failures": []
+}
